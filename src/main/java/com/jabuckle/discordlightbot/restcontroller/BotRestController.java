@@ -15,6 +15,8 @@ public class BotRestController {
 //        System.out.println(message);
 //    }
 
+    //Create a sub folder in events (rest events?)
+    //Replace the sendGreeting method on the bot with an event here
     @GetMapping(value = "/greet", produces = "application/json")
     public void getGreeting() {
         System.out.println("GET request received.");
