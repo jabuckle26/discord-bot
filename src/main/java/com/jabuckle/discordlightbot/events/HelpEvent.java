@@ -8,8 +8,13 @@ import java.util.List;
 
 public class HelpEvent implements BotEvent {
 
-    public void doAction(MessageChannel channel) {
+    public void doAction(MessageChannel channel, List<String> commandParams) {
         channel.sendMessage("You can run the following commands... \r\n" + getSupportedCommandsAsString()).queue();
+    }
+
+    @Override
+    public boolean verifyCommandParams(List<String> commandParams) {
+        return commandParams.size() == 0;
     }
 
     public  String getSupportedCommandsAsString() {

@@ -4,6 +4,10 @@ import com.jabuckle.discordlightbot.events.*;
 import com.jabuckle.discordlightbot.utils.MessageHelper;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.List;
 
 public class BotListener extends ListenerAdapter {
 
@@ -15,13 +19,23 @@ public class BotListener extends ListenerAdapter {
 
         String messageText = event.getMessage().getContentRaw();
         if (MessageHelper.hasCommandFlag(messageText)) {
-            System.out.println("Command Entered");
             String parsedCommand = MessageHelper.getProvidedCommand(messageText);
             if (MessageHelper.isValidCommand(parsedCommand)) {
-                System.out.println("Valid command!");
-                System.out.println(parsedCommand);
+                List<String> commandParams = MessageHelper.getSubmittedCommandParameters(messageText);
                 BotEvent eventCommand = EventFactory.getEventType(parsedCommand);
-                eventCommand.doAction(event.getChannel());
+                if (eventCommand.verifyCommandParams(commandParams)) {
+                    try {
+                        eventCommand.doAction(event.getChannel(), commandParams);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    event.getChannel().sendMessage("Invalid number of paramerters submmitted for this command. Please use $help for more info").queue();
+                }
             }
         }
     }

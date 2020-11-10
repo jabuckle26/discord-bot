@@ -1,7 +1,11 @@
 package com.jabuckle.discordlightbot.restcontroller;
 import com.jabuckle.discordlightbot.bots.Bot;
+import com.jabuckle.discordlightbot.events.BotEvent;
+import com.jabuckle.discordlightbot.events.EventFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 public class BotRestController {

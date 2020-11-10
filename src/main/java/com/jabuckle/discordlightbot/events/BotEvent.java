@@ -1,11 +1,15 @@
 package com.jabuckle.discordlightbot.events;
 
-import com.jabuckle.discordlightbot.bots.Bot;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.List;
 
 public interface BotEvent {
 
-    public void doAction(MessageChannel channel);
+    public void doAction(MessageChannel channel, List<String> commandParams) throws IOException, InterruptedException, JSONException;
+
+    public boolean verifyCommandParams(List<String> commandParams);
 
 }

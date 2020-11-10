@@ -8,11 +8,11 @@ import javax.security.auth.login.LoginException;
 
 @Service
 public class LightBotImpl implements Bot {
-    private String SECRET_TOKEN = "Nzc1MDM1Mzc1ODMxMDg5MTkz.X6gd8Q.Jn_DRaRxZxmTD3K9RVS0IwS6IEw";
+    private String SECRET_TOKEN = "SECRET TOKEN";
     private JDA jda;
-    private String guildId = "775038095648882688";
-    private String channelId = "775038095648882692";
-    private String userId = "339461936104341505";
+    private String guildId = "<SECRET ID>";
+    private String channelId = "<SECRET ID>";
+    private String userId = "<SECRET ID>";
 
     public LightBotImpl() throws LoginException {
         try {
@@ -29,20 +29,14 @@ public class LightBotImpl implements Bot {
         try {
             jda.getGuildById(guildId)
                     .getTextChannelById(channelId)
-//                    .sendMessage("Hello world!")
                     .sendMessage(message)
                     .queue();
         } catch (Exception e) {
-            System.out.println("Hit an error");
             System.out.println(e);
         }
     }
 
     public void sendGreeting() {
         sendMessage("Hey <@" + userId + ">, whats up??");
-    }
-
-    public void respondToHelpCommand() {
-        sendMessage("Helping you.....");
     }
 }
